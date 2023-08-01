@@ -32,7 +32,20 @@ function RenderLandingPage(props) {
       </div>
 
       {/* Graphs Section: Add code here for the graphs section for your first ticket */}
-      <div className="graphs-section"></div>
+      <div className="graphs-section">
+        <div className="graph-container">
+          <img src={GrantRatesByOfficeImg} alt="column graph" />
+          <p>Search Grant Rates by Office</p>
+        </div>
+        <div className="graph-container">
+          <img src={GrantRatesByNationalityImg} alt="circle graph" />
+          <p>Search Grant Rates by Nationality</p>
+        </div>
+        <div className="graph-container">
+          <img src={GrantRatesOverTimeImg} alt="line graph" />
+          <p>Search Grant Rates</p>
+        </div>
+      </div>
       <div className="view-more-data-btn-container">
         <Button
           type="default"
