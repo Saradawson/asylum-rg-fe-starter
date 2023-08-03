@@ -49,13 +49,27 @@ function RenderLandingPage(props) {
       <div className="view-more-data-btn-container">
         <Button
           type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+          style={{
+            backgroundColor: '#404C4A',
+            color: '#FFFFFF',
+            margin: '10%',
+          }}
           onClick={() => history.push('/graphs')}
         >
           View the Data
         </Button>
+        <Button
+          type="default"
+          style={{
+            backgroundColor: '#404C4A',
+            color: '#FFFFFF',
+            margin: '10%',
+          }}
+          onClick={() => history.push('/graphs')}
+        >
+          Download the Data
+        </Button>
       </div>
-
       <div className="middle-section">
         <div className="hrf-img-container">
           <img src={HrfPhoto} alt="Human Rights First" className="hrf-img" />
