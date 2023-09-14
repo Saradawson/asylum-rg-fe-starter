@@ -51,55 +51,46 @@ function GraphWrapper(props) {
     }
   }
 
-  function updateStateWithNewData(years, view, office, stateSettingCallback) {
+  async function updateStateWithNewData(
+    years,
+    view,
+    office,
+    stateSettingCallback
+  ) {
     if (office === 'all' || !office) {
-      Promise.all([
-        axios.get(`${url}/cases/fiscalSummary`, {
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        }),
-        axios.get(`${url}/cases/citizenshipSummary`, {
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        }),
-      ])
-        .then(result => {
-          result[0].data['citizenshipResults'] = result[1].data;
-          stateSettingCallback(view, office, [result[0].data]);
-        })
-        .catch(err => {
-          console.error(err);
-        });
+      const fiscalSum = await axios.get(`${url}/cases/fiscalSummary`, {
+        params: {
+          from: years[0],
+          to: years[1],
+          office: office,
+        },
+      });
+      const citizenSum = await axios.get(`${url}/cases/citizenshipSummary`, {
+        params: {
+          from: years[0],
+          to: years[1],
+          office: office,
+        },
+      });
+      fiscalSum.data.citizenshipResults = citizenSum.data;
+      stateSettingCallback(view, office, [fiscalSum.data]);
     } else {
-      Promise.all([
-        axios.get(`${url}/cases/fiscalSummary`, {
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        }),
-        axios.get(`${url}/cases/citizenSummary`, {
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        }),
-      ])
-        .then(result => {
-          result[0].data['citizenshipResults'] = result[1].data;
-          stateSettingCallback(view, office, [result[0].data]);
-        })
-        .catch(err => {
-          console.error(err);
-        });
+      const fiscalSum = await axios.get(`${url}/cases/fiscalSummary`, {
+        params: {
+          from: years[0],
+          to: years[1],
+          office: office,
+        },
+      });
+      const citizenSum = await axios.get(`${url}/cases/citizenshipSummary`, {
+        params: {
+          from: years[0],
+          to: years[1],
+          office: office,
+        },
+      });
+      fiscalSum.data.citizenshipResults = citizenSum.data;
+      stateSettingCallback(view, office, [fiscalSum.data]);
     }
   }
   const clearQuery = (view, office) => {
