@@ -18,11 +18,14 @@ import { HeaderContent } from './components/Layout/Header';
 
 import { Layout } from 'antd';
 import GraphsContainer from './components/pages/DataVisualizations/GraphsContainer';
+import LoadingComponent from './components/common/LoadingComponent';
+import ProfilePage from './components/common/ProfilePage';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import reducer from './state/reducers';
 import { colors } from './styles/data_vis_colors';
 import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const { primary_accent_color } = colors;
 
@@ -42,11 +45,17 @@ ReactDOM.render(
 
 export function App() {
   const { Footer, Header } = Layout;
+  const { isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <LoadingComponent></LoadingComponent>;
+  }
+
   return (
     <Layout>
       <Header
         style={{
-          height: '10vh',
+          height: '100%',
           display: 'flex',
           alignItems: 'center',
           backgroundColor: primary_accent_color,
@@ -57,6 +66,7 @@ export function App() {
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/graphs" component={GraphsContainer} />
+        <Route path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer

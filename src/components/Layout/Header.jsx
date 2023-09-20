@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Logo from '../../styles/Images/WhiteLogo.png';
 import { colors } from '../../styles/data_vis_colors';
 import AuthNav from '../../auth/auth-nav';
-import { Auth0Provider } from '@auth0/auth0-react';
 
 const { primary_accent_color } = colors;
 
@@ -23,14 +22,36 @@ function HeaderContent() {
           <Image width={100} src={Logo} preview={false} alt="HRF logo white" />
         </a>
       </div>
-      <div>
-        <AuthNav />
-        <Link to="/" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
-          Home
-        </Link>
-        <Link to="/graphs" style={{ color: '#E2F0F7' }}>
-          Graphs
-        </Link>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-end',
+          width: '30%',
+        }}
+      >
+        <div id="loginBtn-container">
+          <AuthNav></AuthNav>
+        </div>
+        <div
+          id="nav"
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+          }}
+        >
+          <Link to="/profile" style={{ color: '#E2F0F7' }}>
+            Profile
+          </Link>
+          <Link to="/" style={{ color: '#E2F0F7' }}>
+            Home
+          </Link>
+          <Link to="/graphs" style={{ color: '#E2F0F7' }}>
+            Graphs
+          </Link>
+        </div>
       </div>
     </div>
   );
